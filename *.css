@@ -1,0 +1,41 @@
+
+header {
+    font-family: monospace;
+    background-color: white;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#header-logo {
+    width: 100px
+}
+
+body {
+    border-collapse: collapse;
+    font-family: monospace;
+    border: none;
+}
+
+footer {
+    border-color: black;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    background-color: blue;
+    
+}
+
+#tavoitteet_ {
+    color: black;
+    width: auto;
+}
+
+#yhteystiedot_ {
+    width: 100%
+}
+
+.sosicons_ {
+    width: 50px
+}
