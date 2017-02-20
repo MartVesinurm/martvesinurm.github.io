@@ -1,41 +1,296 @@
 
-header {
-    font-family: monospace;
-    background-color: white;
-    padding-top: 10px;
-    padding-bottom: 30px;
-    padding-left: 20px;
-    padding-right: 20px;
+a {
+    text-decoration: none;
+    color: white;
+    font-family: sans-serif;
 }
 
+
+#main_ {
+   background-image: url(assets/images/background.gif);
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center center;
+   background-attachment: fixed;
+   height: 50vh;
+   padding-bottom: 400px;
+   color: white;
+   transition: 1s;   
+}
+
+#header_ {
+    font-family: monospace;
+    padding-top: 1%;
+    padding-bottom: 3%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+#paaotsikko {
+    transition: 1s;
+}
 #header-logo {
-    width: 100px
+    min-width: 100px;
+    transition: 2s;
+    width: 25%
+}
+
+#valikko_ {
+    display: none;
+}
+
+#listtype_ {
+    transition: 2s;
+    list-style-type: none;
+}
+
+.navlink_ {
+    color: white;
+    transition: 2s;
+    margin-right: 3em;
+    padding-bottom: 7px;
+    text-align: center;
 }
 
 body {
-    border-collapse: collapse;
+    min-width: 250px;
+    text-align: center;
     font-family: monospace;
-    border: none;
+    background-color: rgb(30, 144, 255);
+}
+
+#bernervideo_ {
+    border: 0;
+    width: 100%;
+    height: 50vh;
+}
+
+#tekstit_ {
+    padding-top: 5%;
+    padding-bottom: 5%;
+    background-image: url(assets/images/rapistunut_tie.jpg);
+    background-size: cover;
+}
+
+
+#minulle_{
+    transition: 2s;
+    background-color: white;
+    padding-top: 1%;
+}
+
+#powerpoint_ {
+    border-width: 1px;
+    margin-bottom: 5px;
+    max-width: 100%;
+    
 }
 
 footer {
-    border-color: black;
     padding-top: 30px;
     padding-bottom: 10px;
     padding-left: 15px;
-    background-color: blue;
+    background-color: rgb(30, 144, 255);
     
+}
+
+
+#otayhteyttatekstit_ {
+    text-align: left;
+    display: block;
 }
 
 #tavoitteet_ {
     color: black;
     width: auto;
 }
+#otayhteytta_ {
+    text-align: left;
+    display: block;
+}
 
-#yhteystiedot_ {
-    width: 100%
+#footer-logo {
+    width: 50%;
 }
 
 .sosicons_ {
-    width: 50px
+    transition: 1s;
+    float: right;
+    padding-right: 40px;
+    display: block;
+    width: 40%
 }
+.sosicons_:hover {
+        width: 50%;
+       opacity: 0.7; 
+    }
+
+/*INFO.HTML */
+
+
+.docpics_ {
+    width: 20%;
+    max-width: 100px;
+    transition: 1s;
+}
+
+.docpics_:hover {
+    width: 30%;
+}
+
+#downloadtable_ {
+    font-size: 200%;
+    width: 100%;
+}
+
+
+
+
+
+
+/* TÄSTÄ ALKAA DESKTOP VERSIO */
+
+
+
+
+
+
+@media (min-width: 800px) {
+
+#main_ {
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0; 
+  margin: auto;
+    }
+    
+    
+#header-logo {
+    max-width: 200px;
+    float: left;
+    width: 20%;
+}
+
+#paaotsikko {
+        text-align: center;
+        font-size: 300%;
+        margin-right: 15%;
+    }
+
+#listtype_ {
+    list-style-type: none;
+}
+
+.navlink_ {
+    display: inline-block;
+    font-size: 20px;
+    }
+
+body {
+    min-width: 600px;
+    max-width: 100%;
+    font-family: monospace;
+    background-color: rgb(30, 144, 255);
+}
+
+#bernervideo_ {
+    border: 0;
+    width: 100%;
+    height: 700px;
+}
+
+#tekstit_ {
+    font-size: 20px;
+    background-repeat: no-repeat;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    background-image: url(assets/images/rapistunut_tie.jpg);
+    background-size: cover;
+    min-height: 600px;
+}
+
+
+#minulle_{
+    font-size: 20px;
+    background-color: white;
+    padding-top: 1%;
+}
+#powerpoint_ {
+    border-width: 1px;
+    margin-bottom: 5px;
+    max-width: 100%;
+    
+}
+
+footer {
+    padding-top: 30px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    background-color: rgb(30, 144, 255);
+    
+}
+#otayhteytta_ {
+     font-size: 20px;   
+    }
+    
+#otayhteyttatekstit_ {
+    font-size: 14px;
+    padding-top: 30px;
+    text-align: left;
+}
+
+#sosiaalinenmedia_ {
+      font-size: 20px;
+      position: relative;
+      right: 80px;
+    }
+#footer-logo {
+    max-width: 200px;
+    width: 50%;
+}
+    
+#allicons_ {
+        max-width: 200px;
+        width: 13%;
+        position: relative;
+        right: 100px;
+        padding-bottom: 20px;
+        
+ }
+    
+#valikko_ {
+     display: none;
+    }
+    
+#valikko_ li {
+     display: inline-block;
+    }
+    
+    
+    
+    /*INFO.HTML */
+
+
+    
+.docpics_ {
+    width: 20%;
+    max-width: 100px;
+    transition: 1s;
+}
+
+.docpics_:hover {
+    max-width: 110px;
+    width: 110px;
+}
+
+    
+#downloadtable_ {
+    font-size: 200%;
+    width: 100%;
+}
+
+    .now_ {
+        color:black;
+    }
+ 
