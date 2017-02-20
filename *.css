@@ -266,7 +266,7 @@ footer {
 #valikko_ li {
      display: inline-block;
     }
-    
+}
     
     
     /*INFO.HTML */
@@ -283,14 +283,31 @@ footer {
     max-width: 110px;
     width: 110px;
 }
-
     
 #downloadtable_ {
     font-size: 200%;
     width: 100%;
 }
 
-    .now_ {
-        color:black;
-    }
- 
+#download_ {
+    border: 0;
+    background: no-repeat;
+    background-image: url(assets/images/bernerkuva.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+ /*MEDIA.HTML*/
+
+#mediakuva_ { 
+    border: 0;
+    background: no-repeat;
+    background-image: url(assets/images/mediakuva.jpg);
+    background-size: cover;
+    background-position: center;
+    padding-bottom: 30px;
+}
+
+.uutislista_ {
+list-style-type: none;
+}
