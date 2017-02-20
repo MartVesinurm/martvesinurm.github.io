@@ -40,13 +40,13 @@ a {
 }
 
 #listtype_ {
-    transition: 2s;
+    transition: 1s;
     list-style-type: none;
 }
 
 .navlink_ {
     color: white;
-    transition: 2s;
+    transition: 1s;
     margin-right: 3em;
     padding-bottom: 7px;
     text-align: center;
