@@ -311,3 +311,7 @@ footer {
 .uutislista_ {
 list-style-type: none;
 }
+
+#uutiset_ {
+    height: 50vh;
+}
