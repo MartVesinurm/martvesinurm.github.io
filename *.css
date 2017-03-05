@@ -308,10 +308,44 @@ footer {
     padding-bottom: 30px;
 }
 
-.uutislista_ {
-list-style-type: none;
+#karuselli {
+    background-color:rgba(255, 255, 255, 0.5);
+    height: 40em;
+    margin: 8%;
 }
 
-#uutiset_ {
-    height: 50vh;
+
+#elem1, #elem2, #elem3 {
+    padding-bottom: 8%;
+    list-style-type: none;
+    padding-right: 8%;
+    
+}
+
+#elem1 {
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+#elem3 {
+    font-weight: bolder;
+}
+.button {
+  background-color: rgba(255,255,255,0.0);
+  cursor: pointer;
+}
+
+#next {
+    float: right;
+    position: relative;
+}
+
+#previous {
+    float: left;
+    position: relative;
+}
+
+#pause {
+    float: center;
+    position: relative;
 }

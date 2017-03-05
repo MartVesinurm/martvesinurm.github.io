@@ -1,0 +1,15 @@
+{
+  "uutiset" : [ {
+    "otsikko" : "Tätä liikenneuudistus toteutuessaan tarkoittaa",
+    "päivämäärä" : "Ilta-Sanomat 23.1",
+    "sisältö" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et fermentum lacus. In mauris ante, venenatis vitae libero in, maximus vestibulum ligula. Praesent at turpis eget nunc accumsan venenatis suscipit in enim. Aenean facilisis, eros et pharetra elementum, odio purus venenatis ipsum, eu dapibus nunc diam quis diam. Duis vehicula arcu mi, ut dignissim eros convallis et. Etiam sodales blandit nibh, pulvinar convallis ante blandit sed. Sed vestibulum viverra nunc, id auctor mauris varius sed. Mauris at tellus ultricies, posuere ligula ac, viverra elit. Mauris lectus enim, efficitur id commodo ornare, pretium sed lacus. Vivamus et efficitur ex."
+  }, {
+    "otsikko" : "Berner haluaa uudistaa liikenteen",
+    "päivämäärä" : "Iltalehti 3.11",
+    "sisältö" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et fermentum lacus. In mauris ante, venenatis vitae libero in, maximus vestibulum ligula. Praesent at turpis eget nunc accumsan venenatis suscipit in enim. Aenean facilisis, eros et pharetra elementum, odio purus venenatis ipsum, eu dapibus nunc diam quis diam. Duis vehicula arcu mi, ut dignissim eros convallis et. Etiam sodales blandit nibh, pulvinar convallis ante blandit sed. Sed vestibulum viverra nunc, id auctor mauris varius sed. Mauris at tellus ultricies, posuere ligula ac, viverra elit. Mauris lectus enim, efficitur id commodo ornare, pretium sed lacus. Vivamus et efficitur ex."
+  }, {
+    "otsikko" : "Liikenneuudistus kaatui!",
+    "päivämäärä" : "Helsingin Sanomat 10.1",
+    "sisältö" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et fermentum lacus. In mauris ante, venenatis vitae libero in, maximus vestibulum ligula. Praesent at turpis eget nunc accumsan venenatis suscipit in enim. Aenean facilisis, eros et pharetra elementum, odio purus venenatis ipsum, eu dapibus nunc diam quis diam. Duis vehicula arcu mi, ut dignissim eros convallis et. Etiam sodales blandit nibh, pulvinar convallis ante blandit sed. Sed vestibulum viverra nunc, id auctor mauris varius sed. Mauris at tellus ultricies, posuere ligula ac, viverra elit. Mauris lectus enim, efficitur id commodo ornare, pretium sed lacus. Vivamus et efficitur ex."
+  } ]
+}
