@@ -64,6 +64,10 @@ body {
     width: 100%;
     height: 50vh;
 }
+#video {
+    width: 100%;
+}
+
 
 #tekstit_ {
     padding-top: 5%;
