@@ -221,7 +221,6 @@ function slowDownAll() {
 	car4.speedUp(-50);
 }
 	
-	
 
 var main = function () {
 	var now = Date.now();
@@ -234,6 +233,11 @@ var main = function () {
 
 	requestAnimationFrame(main);
 };
+	
+	
+
+	
+
 
 var w = window;
 requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
