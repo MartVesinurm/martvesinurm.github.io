@@ -7,7 +7,7 @@ var loseState = {
 		winmusic.mute = true;
 		
 		losemusic = game.add.audio('lose');
-		losemusic.play()
+		losemusic.play();
 		
 		var winLabel = game.add.text(89, 89, 'YOU LOST!',
 									{font: '50px Arial', fill: '#00FF00'} );
@@ -25,4 +25,4 @@ var loseState = {
 	restart: function() {
 		game.state.start('menu');
 	},
-}
+};

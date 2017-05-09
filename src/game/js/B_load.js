@@ -5,7 +5,7 @@ var loadState = {
 	preload: function() {
 
 
-		this.logo = this.add.image
+		this.logo = this.add.image;
 		this.add.sprite(0, 0, 'loadpic');
 
 		var loadingLabel = game.add.text(game.world.width / 2 - 150, 430, 'Peliä ladataan...',
@@ -22,11 +22,11 @@ var loadState = {
 		game.load.image('instructions', 'assets/pictures/menu/OHJEET.png');
 		game.load.image('playGame', 'assets/pictures/menu/PELAA.png');
 		game.load.image('information', 'assets/pictures/menu/TIETOA.png');
-		game.load.image('more', 'assets/pictures/menu/more.png')
+		game.load.image('more', 'assets/pictures/menu/more.png');
 
 		game.load.image('backgroundOhjeet', 'assets/pictures/menu/menu_ohjeet.png');
 		game.load.image('backgroundTietoa', 'assets/pictures/menu/menu_credits.png');
-		game.load.image('pauseMenu', 'assets/pictures/menu/pauseMenu.png')
+		game.load.image('pauseMenu', 'assets/pictures/menu/pauseMenu.png');
 
 		//Load lose and win screens
 		game.load.image('winScreen', 'assets/pictures/win.png');
@@ -34,10 +34,6 @@ var loadState = {
 
 		//Load UI sprites
 		game.load.spritesheet('soundOnOff','assets/pictures/UI-sprites/soundOnOff.png', 48, 48, 2, 5, 10);
-		game.load.image('ui-pause', 'assets/pictures/UI-sprites/flatDark13.png');
-		game.load.image('ui-play', 'assets/pictures/UI-sprites/flatDark15.png');
-		game.load.image('ui-settings', 'assets/pictures/UI-sprites/flatDark21.png');
-		game.load.image('ui-check', 'assets/pictures/UI-sprites/flatDark22.png');
 		game.load.image('ui-menu', 'assets/pictures/UI-sprites/flatDark32.png');
 		game.load.image('ui-cross', 'assets/pictures/UI-sprites/flatDark34.png');
 		
@@ -75,25 +71,24 @@ var loadState = {
 	    game.load.image('car81', 'assets/pictures/cars/car8_1.png');
 	    game.load.image('car82', 'assets/pictures/cars/car8_2.png');
 		
-		game.load.audio('car_pass', 'assets/audio/car_pass.wav');
-		game.load.audio('car_whoor', 'assets/audio/car_whoor.wav');
-		game.load.audio('fail', 'assets/audio/fail.wav');
-		game.load.audio('hit', 'assets/audio/hit.wav');
+		game.load.audio('car_pass', 'assets/audio/car_pass.mp3');
+		game.load.audio('car_whoor', 'assets/audio/car_whoor.mp3');
+		game.load.audio('fail', 'assets/audio/fail.mp3');
+		game.load.audio('hit', 'assets/audio/hit.mp3');
 		game.load.audio('level_menu', 'assets/audio/level_menu_.mp3');
 		game.load.audio('level1', 'assets/audio/level1.mp3');
 		game.load.audio('level2', 'assets/audio/level2.mp3');
 		game.load.audio('level3', 'assets/audio/level3.mp3');
-		game.load.audio('lose', 'assets/audio/lose.wav');
+		game.load.audio('lose', 'assets/audio/lose.mp3');
 		game.load.audio('menu', 'assets/audio/menu.mp3');
-		game.load.audio('win', 'assets/audio/win.wav');
-		game.load.audio('drink', 'assets/audio/drink.wav');
-		game.load.audio('mark', 'assets/audio/mark.wav');
-
+		game.load.audio('win', 'assets/audio/win.mp3');
+		game.load.audio('drink', 'assets/audio/drink.mp3');
+		game.load.audio('mark', 'assets/audio/mark.mp3');
 		
 	},
 
 	create: function() {
-		game.state.start('menu')
+		game.state.start('menu');
 	}
 };
 

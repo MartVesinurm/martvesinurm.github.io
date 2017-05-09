@@ -17,4 +17,4 @@ var menuHelpState = {
 	},
 
 	
-}
+};

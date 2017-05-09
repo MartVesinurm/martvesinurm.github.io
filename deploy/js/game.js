@@ -13,7 +13,7 @@ var bootState = {
 			game.physics.startSystem(Phaser.Physics.ARCADE);
 			game.state.start('load');
 	}
-}
+};
 
 var loadState = {
 
@@ -21,7 +21,7 @@ var loadState = {
 	preload: function() {
 
 
-		this.logo = this.add.image
+		this.logo = this.add.image;
 		this.add.sprite(0, 0, 'loadpic');
 
 		var loadingLabel = game.add.text(game.world.width / 2 - 150, 430, 'Peliä ladataan...',
@@ -38,11 +38,11 @@ var loadState = {
 		game.load.image('instructions', 'assets/pictures/menu/OHJEET.png');
 		game.load.image('playGame', 'assets/pictures/menu/PELAA.png');
 		game.load.image('information', 'assets/pictures/menu/TIETOA.png');
-		game.load.image('more', 'assets/pictures/menu/more.png')
+		game.load.image('more', 'assets/pictures/menu/more.png');
 
 		game.load.image('backgroundOhjeet', 'assets/pictures/menu/menu_ohjeet.png');
 		game.load.image('backgroundTietoa', 'assets/pictures/menu/menu_credits.png');
-		game.load.image('pauseMenu', 'assets/pictures/menu/pauseMenu.png')
+		game.load.image('pauseMenu', 'assets/pictures/menu/pauseMenu.png');
 
 		//Load lose and win screens
 		game.load.image('winScreen', 'assets/pictures/win.png');
@@ -50,10 +50,6 @@ var loadState = {
 
 		//Load UI sprites
 		game.load.spritesheet('soundOnOff','assets/pictures/UI-sprites/soundOnOff.png', 48, 48, 2, 5, 10);
-		game.load.image('ui-pause', 'assets/pictures/UI-sprites/flatDark13.png');
-		game.load.image('ui-play', 'assets/pictures/UI-sprites/flatDark15.png');
-		game.load.image('ui-settings', 'assets/pictures/UI-sprites/flatDark21.png');
-		game.load.image('ui-check', 'assets/pictures/UI-sprites/flatDark22.png');
 		game.load.image('ui-menu', 'assets/pictures/UI-sprites/flatDark32.png');
 		game.load.image('ui-cross', 'assets/pictures/UI-sprites/flatDark34.png');
 		
@@ -91,25 +87,24 @@ var loadState = {
 	    game.load.image('car81', 'assets/pictures/cars/car8_1.png');
 	    game.load.image('car82', 'assets/pictures/cars/car8_2.png');
 		
-		game.load.audio('car_pass', 'assets/audio/car_pass.wav');
-		game.load.audio('car_whoor', 'assets/audio/car_whoor.wav');
-		game.load.audio('fail', 'assets/audio/fail.wav');
-		game.load.audio('hit', 'assets/audio/hit.wav');
+		game.load.audio('car_pass', 'assets/audio/car_pass.mp3');
+		game.load.audio('car_whoor', 'assets/audio/car_whoor.mp3');
+		game.load.audio('fail', 'assets/audio/fail.mp3');
+		game.load.audio('hit', 'assets/audio/hit.mp3');
 		game.load.audio('level_menu', 'assets/audio/level_menu_.mp3');
 		game.load.audio('level1', 'assets/audio/level1.mp3');
 		game.load.audio('level2', 'assets/audio/level2.mp3');
 		game.load.audio('level3', 'assets/audio/level3.mp3');
-		game.load.audio('lose', 'assets/audio/lose.wav');
+		game.load.audio('lose', 'assets/audio/lose.mp3');
 		game.load.audio('menu', 'assets/audio/menu.mp3');
-		game.load.audio('win', 'assets/audio/win.wav');
-		game.load.audio('drink', 'assets/audio/drink.wav');
-		game.load.audio('mark', 'assets/audio/mark.wav');
-
+		game.load.audio('win', 'assets/audio/win.mp3');
+		game.load.audio('drink', 'assets/audio/drink.mp3');
+		game.load.audio('mark', 'assets/audio/mark.mp3');
 		
 	},
 
 	create: function() {
-		game.state.start('menu')
+		game.state.start('menu');
 	}
 };
 
@@ -125,15 +120,82 @@ var menuState = {
 		
 		game.add.sprite(0, 0, 'backgroundMenu');
 
+		//Adding audio for all states
 		level1music = game.add.audio('level1');
 		level2music = game.add.audio('level2');
 		level3music = game.add.audio('level3');
 		winmusic = game.add.audio('win');
 		losemusic = game.add.audio('lose');
-		hitmusic = game.add.audio('hit')
+		hitmusic = game.add.audio('hit');
 		menumusic = game.add.audio('level_menu');
-		drinkmusic = game.add.audio('drink')
-		markmusic = game.add.audio('mark')
+		drinkmusic = game.add.audio('drink');
+		markmusic = game.add.audio('mark');
+
+		menumusic.loopFull();
+			
+		potholesRepaired = 0;	
+
+	    //Adding the mute-button
+	    this.musicToggle = this.game.add.button(this.game.world.width - 70, 420, 'soundOnOff', this.toggleMusic, this);
+	    
+	    //Changing the correct frame of the mute-buttons spritesheet.
+	    if (this.game.sound.mute) {
+	      this.musicToggle.frame = 1;
+	    } else {
+	      this.musicToggle.frame = 0;
+	    }
+
+		game.load.image(game.world.width / 2-95, 175, 'playGame' );
+		game.load.image(game.world.width / 2-95, 250, 'instructions' );
+		game.load.image(game.world.width / 2-95, 325, 'information' );
+
+		buttonPlay = game.add.button(game.world.width / 2-95 , 175, 'playGame', this.start, this, 2, 1, 0);
+		buttonInstructions = game.add.button(game.world.width / 2-95 , 250, 'instructions', this.help, this, 2, 1, 0);
+		buttonInfo = game.add.button(game.world.width / 2-95 , 325, 'information', this.info, this, 2, 1, 0);
+
+	},
+  
+	toggleMusic: function() {	
+	        	if (this.game.sound.mute) {
+	        		this.game.sound.mute = false;
+	        		this.musicToggle.frame = 0;
+	        	} else {
+	        		this.game.sound.mute = true;
+	        		this.musicToggle.frame = 1;
+	        	}
+	},
+
+	start: function() {
+		game.state.start('level1');
+	},
+
+	help: function() {
+		game.state.start('menuHelp');
+	},
+
+	info: function()  {
+		game.state.start('menuCredits');
+	},
+	
+};    var soundOn = true;
+    var musicOn = true;
+    var musicToggle;
+
+var menuState = {
+
+	create: function() {
+		
+		game.add.sprite(0, 0, 'backgroundMenu');
+
+		level1music = game.add.audio('level1');
+		level2music = game.add.audio('level2');
+		level3music = game.add.audio('level3');
+		winmusic = game.add.audio('win');
+		losemusic = game.add.audio('lose');
+		hitmusic = game.add.audio('hit');
+		menumusic = game.add.audio('level_menu');
+		drinkmusic = game.add.audio('drink');
+		markmusic = game.add.audio('mark');
 	
 		menumusic.loopFull();
 		
@@ -201,7 +263,7 @@ var menuHelpState = {
 	},
 
 	
-}
+};
 var menuCreditsState = {
 
 	create: function() {
@@ -227,20 +289,25 @@ var menuCreditsState = {
 	}
 
 	
-}
+};
+   
+	//Main game variables and their initialization
     var cars;
     var potholes;
     var marks;
     var drinks;
+
     var playerSpeed = 150;
     var carSpeedRight = 50;
     var carSpeedLeft = -50;
     var potholesRepaired = 0;
     var timeInterval = 2500;
     var player;
-	var levelBuffer;
-	var index; //Indeksi satunnaisen autokuvan generoimisieen
+    var levelBuffer; //Used to determine level spawn function
+	var index;		 //Index for generating car sprite
 	var level;
+
+
 
 var level1State = {
 
@@ -290,44 +357,46 @@ var level1State = {
 	    potholeTimer = game.time.events.loop(5000, addPotholes, this); 
 	    powerupTimer = game.time.events.loop(8000, addPowerups, this); 
 
+
 		//Adding the mute-button
-	    this.musicToggle = this.game.add.button(this.game.world.width - 70, 420, 'soundOnOff', this.toggleMusic, this);
-	    
+		this.musicToggle = this.game.add.button(this.game.world.width - 70, 420, 'soundOnOff', this.toggleMusic, this);
+
 	    //Changing the correct frame of the mute-buttons spritesheet.
 	    if (this.game.sound.mute) {
-	      this.musicToggle.frame = 1;
+	    	this.musicToggle.frame = 1;
 	    } else {
-	      this.musicToggle.frame = 0;
-	    };
+	    	this.musicToggle.frame = 0;
+	    }
 
 	    //Adding the pause-button
 	    this.pause_label = this.game.add.button(this.game.world.width - 130, 420, 'ui-menu', this.pause, this);
 
-	    	    
+
 	},
 
-
+	//Function for toggling sound on and off
 	toggleMusic: function() {	
 		if (this.game.sound.mute) {
 			this.game.sound.mute = false;
 			this.musicToggle.frame = 0;
-		 } else {
+		} else {
 			this.game.sound.mute = true;
 			this.musicToggle.frame = 1;
-		 }
+		}
 	},
 
+	//Function to pause and unpause the game
 	pause: function(){
-	    	if(game.paused == true){
-	    		menu.destroy();
-	    		choiseLabel.destroy();
-	    		game.input.onTap.remove(this.pause, this);	
-	    		this.game.paused = false;
+		if(game.paused === true){
+			menu.destroy();
+			choiseLabel.destroy();
+			game.input.onTap.remove(this.pause, this);	
+			this.game.paused = false;
 
-	    	}else{
+		}else{
 
 	    		// When the pause button is pressed, pause the game
-		        this.game.paused = true;
+	    		this.game.paused = true;
 
 		        // Then add the menu
 		        menu = game.add.sprite(0, 0, 'pauseMenu');
@@ -337,83 +406,85 @@ var level1State = {
 		        choiseLabel = game.add.text(this.game.world.width / 2, 240, 'Klikkaa jatkaaksesi peliä', { font: '30px Arial', fill: '#fff' });
 		        choiseLabel.anchor.setTo(0.5, 0.5);
 
-	    	}
+		    }
 
-	},
-
-
+		},
 
 
+
+	//Level update loop
 	update: function() {
-		var cursors = game.input.keyboard.createCursorKeys();
-	
-		player.body.velocity.x = 0;
-		player.body.velocity.y = 0;
+			var cursors = game.input.keyboard.createCursorKeys();
 
-		cars.forEach(checkPos, this);
+			player.body.velocity.x = 0;
+			player.body.velocity.y = 0;
 
-
-
-		if (cursors.left.isDown)
-	    {
-	        player.body.velocity.x = -playerSpeed;
-
-	        player.animations.play('left');
-	    }
-	    else if (cursors.right.isDown)
-	    {
-	        player.body.velocity.x = playerSpeed;
-
-	        player.animations.play('right');
-	    }
-		else if (cursors.up.isDown)
-	    {
-	        player.body.velocity.y = -playerSpeed;
-
-	        player.animations.play('up');
-	    }
-		else if (cursors.down.isDown)
-	    {
-	        player.body.velocity.y = playerSpeed;
-
-	        player.animations.play('down');
-	    }else {
-			player.frame = 26;
-			player.animations.stop()
-		}
+			// cars.forEach(checkPos, this);
 
 
-	    if(potholesRepaired > 100){
-	    	potholesRepaired = 0
-	    	game.state.start('level2');
-	    }
+
+			if (cursors.left.isDown)
+			{
+				player.body.velocity.x = -playerSpeed;
+
+				player.animations.play('left');
+			}
+			else if (cursors.right.isDown)
+			{
+				player.body.velocity.x = playerSpeed;
+
+				player.animations.play('right');
+			}
+			else if (cursors.up.isDown)
+			{
+				player.body.velocity.y = -playerSpeed;
+
+				player.animations.play('up');
+			}
+			else if (cursors.down.isDown)
+			{
+				player.body.velocity.y = playerSpeed;
+
+				player.animations.play('down');
+			}else {
+				player.frame = 26;
+				player.animations.stop();
+			}
 
 
-	    game.world.bringToTop(cars);
-	    updateText();
-		
-		game.physics.arcade.overlap(player, drinks, energyBoost, null, this);
-		game.physics.arcade.overlap(player, marks, speedAlert, null, this);
-		game.physics.arcade.overlap(player, cars, die, null, this);
-		game.physics.arcade.overlap(player, potholes, updateScore, null, this);
-		game.physics.arcade.collide(cars, cars);
-		game.physics.arcade.overlap(cars, potholes, reduceScore, null, this);
-		game.physics.arcade.overlap(cars, drinks, killPowerup, null, this);
-		game.physics.arcade.overlap(cars, marks, killPowerup, null, this);
-		
-		if(potholesRepaired < -1000) {
-			die(player)
-		}
-
-	},
-
-	
+			if(potholesRepaired > 100){
+				potholesRepaired = 0;
+				game.state.start('level2');
+			}
 
 
- };
+			game.world.bringToTop(cars);
+			updateText();
+
+			game.physics.arcade.overlap(player, drinks, energyBoost, null, this);
+			game.physics.arcade.overlap(player, marks, speedAlert, null, this);
+			game.physics.arcade.overlap(player, cars, die, null, this);
+			game.physics.arcade.overlap(player, potholes, updateScore, null, this);
+			game.physics.arcade.collide(cars, cars);
+			game.physics.arcade.overlap(cars, potholes, reduceScore, null, this);
+			game.physics.arcade.overlap(cars, drinks, killPowerup, null, this);
+			game.physics.arcade.overlap(cars, marks, killPowerup, null, this);
+
+			if(potholesRepaired < -1000) {
+				die(player);
+			}
+
+		},
+
+
+
+
+	};
+
+	//Called when player completes level 1
 	function winLevel() {
 		game.state.start('level2');
-	};
+	}
 
 
 var level2State = {
@@ -520,7 +591,7 @@ var level2State = {
 		player.body.velocity.x = 0;
 		player.body.velocity.y = 0;
 
-		cars.forEach(checkPos, this);
+		// cars.forEach(checkPos, this);
 		
 		if (cursors.left.isDown)
 	    {
@@ -598,7 +669,7 @@ var level3State = {
 		carSpeedLeft = -100;
 		carSpeedRight = 100;
 		
-		level = 3
+		level = 3;
 		game.add.sprite(0, 0, 'background3');
 		cars = game.add.group();
 		potholes = game.add.group();
@@ -659,7 +730,7 @@ var level3State = {
 	},
 
 	pause: function(){
-	    	if(game.paused == true){
+	    	if(game.paused === true){
 	    		menu.destroy();
 	    		choiseLabel.destroy();
 	    		game.input.onTap.remove(this.pause, this);	
@@ -688,7 +759,7 @@ var level3State = {
 		player.body.velocity.x = 0;
 		player.body.velocity.y = 0;
 
-		cars.forEach(checkPos, this);
+		// cars.forEach(checkPos, this);
 		
 		if (cursors.left.isDown)
 	    {
@@ -723,7 +794,7 @@ var level3State = {
 	    }
 
 	    if(potholesRepaired > 200){
-	    	potholesRepaired = 0
+	    	potholesRepaired = 0;
 	    	game.state.start('win');
 	    }
 
@@ -741,7 +812,7 @@ var level3State = {
 		game.physics.arcade.overlap(cars, marks, killPowerup, null, this);
 
 		if(potholesRepaired < -1000) {
-			die(player)
+			die(player);
 		}
 	},
 
@@ -752,7 +823,7 @@ var level3State = {
 
 	function winLevel() {
 		game.state.start('win');
-	};
+	}
 
 var winState = {
 
@@ -760,7 +831,7 @@ var winState = {
 		
 		level3music.mute = true;
 		winmusic.mute = false;
-		winmusic.loopFull()
+		winmusic.loopFull();
 		var winLabel = game.add.text(89, 89, 'YOU WON!',
 									{font: '50px Arial', fill: '#00FF00'} );
 
@@ -778,7 +849,7 @@ var winState = {
 		winmusic.mute = true;
 		game.state.start('menu');
 	},
-}
+};
 var loseState = {
 
 	create: function() {
@@ -788,7 +859,7 @@ var loseState = {
 		winmusic.mute = true;
 		
 		losemusic = game.add.audio('lose');
-		losemusic.play()
+		losemusic.play();
 		
 		var winLabel = game.add.text(89, 89, 'YOU LOST!',
 									{font: '50px Arial', fill: '#00FF00'} );
@@ -806,7 +877,7 @@ var loseState = {
 	restart: function() {
 		game.state.start('menu');
 	},
-}
+};
 //Create a new game
 var game = new Phaser.Game(720, 480, Phaser.CANVAS, 'gameDiv');
 
@@ -820,7 +891,7 @@ game.state.add('menuCredits', menuCreditsState);
 game.state.add('level1', level1State);
 game.state.add('level2', level2State);
 game.state.add('level3', level3State);
-game.state.add('lose', loseState)
+game.state.add('lose', loseState);
 game.state.add('win', winState);
 
 // Start game
@@ -833,21 +904,26 @@ game.state.start('boot');
 	    // Add the pipe to our previously created group
 	    cars.add(carToAdd);
 
-	    // Enable physics on the pipe 
+	    // Enable physics on the car
 	    game.physics.arcade.enable(carToAdd);
 
-	    // Add velocity to the pipe to make it move left
-	    if(carDir % 2 == 0){
+	    // Add velocity to the car to make it move left
+	    if(carDir % 2 === 0){
 	    	carToAdd.body.velocity.x = carSpeedRight;
 		}else{
 			carToAdd.body.velocity.x = carSpeedLeft;
 		}
 
 
-	    // Automatically kill the pipe when it's no longer visible 
+	    // Automatically kill the car when it's no longer visible 
 	    carToAdd.checkWorldBounds = true;
 	    carToAdd.outOfBoundsKill = true;
-	};
+	}
+
+
+	//Spawn functions for different levels. Car spawn locations are randomized
+	//and car spritsheet is also randomized.
+	//Game level alters available car sprites e.g. not all car types spawn in all levels
 
 	function spawnLevel1() {
 	    // Randomly pick a number between 1 and 4
@@ -858,20 +934,20 @@ game.state.start('boot');
 	    // addOneCar(0, 159)
 
 	    if(dir == 1){
-			addOneCar(720, 290, randomCarLeft(), dir)
+			addOneCar(720, 290, randomCarLeft(), dir);
 		}else if(dir == 2){
-			addOneCar(0, 322, randomCarRight(), dir)
+			addOneCar(0, 322, randomCarRight(), dir);
 		}else if(dir == 3){
-			addOneCar(720, 130, randomCarLeft(), dir)
+			addOneCar(720, 130, randomCarLeft(), dir);
 		}else{
-			addOneCar(0, 161, randomCarRight(), dir)
+			addOneCar(0, 161, randomCarRight(), dir);
 		}
 
 	     
-	};
+	}
 
 	function spawnLevel2() {
-	    // Randomly pick a number between 1 and 4
+	    // Randomly pick a number between 1 and 6
 	    // This will be the direction car enters
 	    var dir = Math.floor(Math.random() * 6) + 1;
 
@@ -879,25 +955,25 @@ game.state.start('boot');
 	    // addOneCar(0, 159)
 
 	    if(dir == 1){
-			addOneCar(720, 82, randomCarLeft(), dir)
+			addOneCar(720, 82, randomCarLeft(), dir);
 		}else if(dir == 2){
-			addOneCar(0, 122, randomCarRight(), dir)
+			addOneCar(0, 122, randomCarRight(), dir);
 		}else if(dir == 3){
-			addOneCar(720, 162, randomCarLeft(), dir)
+			addOneCar(720, 162, randomCarLeft(), dir);
 		}else if(dir == 4){
-			addOneCar(0, 305, randomCarRight(), dir)
+			addOneCar(0, 305, randomCarRight(), dir);
 		}else if(dir == 5){
-			addOneCar(720, 347, randomCarLeft(), dir)
+			addOneCar(720, 347, randomCarLeft(), dir);
 		}else {
-			addOneCar(0,387, randomCarRight(), dir)
+			addOneCar(0,387, randomCarRight(), dir);
 		}
 
 	     
-	};
+	}
 
 
 	function spawnLevel3() {
-	    // Randomly pick a number between 1 and 4
+	    // Randomly pick a number between 1 and 8
 	    // This will be the direction car enters
 	    var dir = Math.floor(Math.random() * 8) + 1;
 
@@ -905,26 +981,27 @@ game.state.start('boot');
 	    // addOneCar(0, 159)
 
 	    if(dir == 1){
-			addOneCar(720, 115, randomCarLeft(), dir)
+			addOneCar(720, 115, randomCarLeft(), dir);
 		}else if(dir == 3){
-			addOneCar(720, 144, randomCarLeft(), dir)
+			addOneCar(720, 144, randomCarLeft(), dir);
 		}else if(dir == 2){
-			addOneCar(0, 179, randomCarRight(), dir)
+			addOneCar(0, 179, randomCarRight(), dir);
 		}else if(dir == 4){
-			addOneCar(0, 208, randomCarRight(), dir)
+			addOneCar(0, 208, randomCarRight(), dir);
 		}else if(dir == 5){
-			addOneCar(720, 322, randomCarLeft(), dir)
+			addOneCar(720, 322, randomCarLeft(), dir);
 		}else if(dir == 7){
-			addOneCar(720, 354, randomCarLeft(), dir)
+			addOneCar(720, 354, randomCarLeft(), dir);
 		}else if(dir == 6){
-			addOneCar(0, 386, randomCarRight(), dir)
+			addOneCar(0, 386, randomCarRight(), dir);
 		}else 
-			addOneCar(0, 416, randomCarRight(), dir)
+			addOneCar(0, 416, randomCarRight(), dir);
 
 	     
-	};
+	}
 
-
+	//Called to determine where car comes from the left side of game area
+	//Location is random and depends on current level
 	function randomCarLeft() {
 		if(level == 1) {
 			levelBuffer = 3;
@@ -964,6 +1041,8 @@ game.state.start('boot');
 		}
 	}
 
+	//Called to determine where car comes from the right side of game area
+	//Location is random and depends on current level
 	function randomCarRight() {
 		if(level == 1) {
 			levelBuffer = 3;
@@ -1002,10 +1081,13 @@ game.state.start('boot');
 		}	
 	}
 
+
+	//Called when a powerup is ran over by a car
 	function killPowerup(car, item) {
 		item.kill();
 	}
 
+	//Function to add one pothole to game area
 	function addPothole(x, y) {
 	    // Create a pothole at the position x and y
 	    var potholeToAdd = game.add.sprite(x, y, 'pothole');
@@ -1016,21 +1098,23 @@ game.state.start('boot');
 	    // Enable physics on the pothole
 	    game.physics.arcade.enable(potholeToAdd);
 
-	};
+	}
 
+	//Function to generate potholes to game
 	function addPotholes() {
 	    // Randomly pick a number between 1 and 2
 	    // This will select upper or lower road
 	    var upOrDown = game.rnd.integerInRange(0,1);
 
 	    if(upOrDown >= 0.5){
-	    	addPothole(game.rnd.integerInRange(10,690), game.rnd.integerInRange(130,170) )
+	    	addPothole(game.rnd.integerInRange(10,690), game.rnd.integerInRange(130,170) );
 	    }else{
-	    	addPothole(game.rnd.integerInRange(10,690), game.rnd.integerInRange(290,300) )
+	    	addPothole(game.rnd.integerInRange(10,690), game.rnd.integerInRange(290,300) );
 	    }
 	     
-	};
+	}
 
+	//Function to add one powerup
 	function addPowerup(x,y,type){
 		if(type == 'SpeedSign'){
 			if(marks.length < 2) {
@@ -1039,49 +1123,34 @@ game.state.start('boot');
 			}
 		}else if(type == 'energyDrink'){
 			if(drinks.length < 2) {
-			var drink = game.add.sprite(x, y, 'energyDrink')
+			var drink = game.add.sprite(x, y, 'energyDrink');
 			drinks.add(drink);
 			}
 		}
 
-	};
+	}
 
+	//Function to generate powerups
 	function addPowerups(){
 		var choose = game.rnd.integerInRange(0,1);
 
 		if(choose >= 0.5){
-	    	addPowerup(game.rnd.integerInRange(10,690), game.rnd.integerInRange(10,460), 'SpeedSign' )
+	    	addPowerup(game.rnd.integerInRange(10,690), game.rnd.integerInRange(10,460), 'SpeedSign' );
 	    }else{
 	    	addPowerup(game.rnd.integerInRange(10,690), game.rnd.integerInRange(10,460), 'energyDrink');
 
-		};
-	};
-
-
-	function direction(){
-		return Math.floor(Math.random() * 4) + 1;
-	};
-
-	function randSpeed(){
-		return Math.floor(Math.random() * 30) + 30
-	};
-
-	function checkPos(car) {
-		if(car.x > 760){
-			car.x = -32
-		}else if(car.x < -40){
-			car.x = 752
 		}
-	};
+	}
 
-
+	//Called when player collisions with car.
 	function die(player, car) {
 		game.state.start('lose');
-	};
+	}
 
+	//Called when player picks up powerup that increases player speed.
 	function energyBoost(player, drink) {
-		drink.kill()
-		drinkmusic.play()
+		drink.kill();
+		drinkmusic.play();
 		if(playerSpeed == 150) {
 		playerSpeed = playerSpeed * 2;
 
@@ -1089,18 +1158,20 @@ game.state.start('boot');
 			playerSpeed = playerSpeed * 0.5;
 		});
 		}
-	};
+	}
 
+
+	//Called when player picks up powerup that slowsdown cars
 	function speedAlert(player, mark) {
-		mark.kill()
-		markmusic.play()
+		mark.kill();
+		markmusic.play();
 		cars.forEach(function(item) {
 			if(item.body.velocity.x < 0){
-				item.body.velocity.x = carSpeedLeft / 2
+				item.body.velocity.x = carSpeedLeft / 2;
 			}else{
-				item.body.velocity.x = carSpeedRight / 2
+				item.body.velocity.x = carSpeedRight / 2;
 			}
-		})
+		});
 
 		this.time.events.add(2000, function() {
 			cars.forEach(function(item) {
@@ -1108,57 +1179,28 @@ game.state.start('boot');
 					item.body.velocity.x = carSpeedLeft;
 				}else{
 					item.body.velocity.x = carSpeedRight;
-				};
+				}
 			});
 		});
-	};
+	}
 
 
 	function reduceScore(car, pothole) {
-		potholesRepaired -= 0.5
-	};
+		potholesRepaired -= 0.5;
+	}
 
 	function updateScore(player, pothole){
-		pothole.kill()
-		hitmusic.play()
-		potholesRepaired += 50
-	};
+		pothole.kill();
+		hitmusic.play();
+		potholesRepaired += 50;
+	}
 
 
 	function updateText() {
 
 	    text.setText("Score: " + Math.floor(potholesRepaired));
 
-	};
-
-
-
-	// function music(){
-		
-	// 	if(soundOn){
-	// 		console.log("Tried to change UI");
-	// 		buttonMuteMusic = game.add.button(600, 420, 'ui-musicOn', music, this);
-	// 		buttonMuteMusic.bringToTop();
-	// 	}else{
-	// 		console.log("Tried to change UI");
-	// 		buttonMuteMusic = game.add.button(600, 420, 'ui-musicOff', music, this);
-	// 		buttonMuteMusic.bringToTop();
-	// 	}
-	// };
-
-	// function sound(){
-		
-
-	// 	if(soundOn){
-	// 		console.log("Tried to change UI");
-	// 		buttonMuteSound = game.add.button(660, 420, 'ui-soundOn', sound, this);
-	// 		buttonMuteSound.bringToTop();
-	// 	}else{
-	// 		console.log("Tried to change UI");
-	// 		buttonMuteSound = game.add.button(660, 420, 'ui-soundOff', sound, this);
-	// 		buttonMuteSound.bringToTop();
-	// 	}
-	// };
+	}
 
 // Avoid `console` errors in browsers that lack a console.
 (function() {

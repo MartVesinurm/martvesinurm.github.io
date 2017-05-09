@@ -4,7 +4,7 @@ var winState = {
 		
 		level3music.mute = true;
 		winmusic.mute = false;
-		winmusic.loopFull()
+		winmusic.loopFull();
 		var winLabel = game.add.text(89, 89, 'YOU WON!',
 									{font: '50px Arial', fill: '#00FF00'} );
 
@@ -22,4 +22,4 @@ var winState = {
 		winmusic.mute = true;
 		game.state.start('menu');
 	},
-}
+};

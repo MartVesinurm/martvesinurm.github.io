@@ -1,16 +1,21 @@
+   
+	//Main game variables and their initialization
     var cars;
     var potholes;
     var marks;
     var drinks;
+
     var playerSpeed = 150;
     var carSpeedRight = 50;
     var carSpeedLeft = -50;
     var potholesRepaired = 0;
     var timeInterval = 2500;
     var player;
-	var levelBuffer;
-	var index; //Indeksi satunnaisen autokuvan generoimisieen
+    var levelBuffer; //Used to determine level spawn function
+	var index;		 //Index for generating car sprite
 	var level;
+
+
 
 var level1State = {
 
@@ -60,44 +65,46 @@ var level1State = {
 	    potholeTimer = game.time.events.loop(5000, addPotholes, this); 
 	    powerupTimer = game.time.events.loop(8000, addPowerups, this); 
 
+
 		//Adding the mute-button
-	    this.musicToggle = this.game.add.button(this.game.world.width - 70, 420, 'soundOnOff', this.toggleMusic, this);
-	    
+		this.musicToggle = this.game.add.button(this.game.world.width - 70, 420, 'soundOnOff', this.toggleMusic, this);
+
 	    //Changing the correct frame of the mute-buttons spritesheet.
 	    if (this.game.sound.mute) {
-	      this.musicToggle.frame = 1;
+	    	this.musicToggle.frame = 1;
 	    } else {
-	      this.musicToggle.frame = 0;
-	    };
+	    	this.musicToggle.frame = 0;
+	    }
 
 	    //Adding the pause-button
 	    this.pause_label = this.game.add.button(this.game.world.width - 130, 420, 'ui-menu', this.pause, this);
 
-	    	    
+
 	},
 
-
+	//Function for toggling sound on and off
 	toggleMusic: function() {	
 		if (this.game.sound.mute) {
 			this.game.sound.mute = false;
 			this.musicToggle.frame = 0;
-		 } else {
+		} else {
 			this.game.sound.mute = true;
 			this.musicToggle.frame = 1;
-		 }
+		}
 	},
 
+	//Function to pause and unpause the game
 	pause: function(){
-	    	if(game.paused == true){
-	    		menu.destroy();
-	    		choiseLabel.destroy();
-	    		game.input.onTap.remove(this.pause, this);	
-	    		this.game.paused = false;
+		if(game.paused === true){
+			menu.destroy();
+			choiseLabel.destroy();
+			game.input.onTap.remove(this.pause, this);	
+			this.game.paused = false;
 
-	    	}else{
+		}else{
 
 	    		// When the pause button is pressed, pause the game
-		        this.game.paused = true;
+	    		this.game.paused = true;
 
 		        // Then add the menu
 		        menu = game.add.sprite(0, 0, 'pauseMenu');
@@ -107,81 +114,83 @@ var level1State = {
 		        choiseLabel = game.add.text(this.game.world.width / 2, 240, 'Klikkaa jatkaaksesi peliä', { font: '30px Arial', fill: '#fff' });
 		        choiseLabel.anchor.setTo(0.5, 0.5);
 
-	    	}
+		    }
 
-	},
-
-
+		},
 
 
+
+	//Level update loop
 	update: function() {
-		var cursors = game.input.keyboard.createCursorKeys();
-	
-		player.body.velocity.x = 0;
-		player.body.velocity.y = 0;
+			var cursors = game.input.keyboard.createCursorKeys();
 
-		cars.forEach(checkPos, this);
+			player.body.velocity.x = 0;
+			player.body.velocity.y = 0;
 
-
-
-		if (cursors.left.isDown)
-	    {
-	        player.body.velocity.x = -playerSpeed;
-
-	        player.animations.play('left');
-	    }
-	    else if (cursors.right.isDown)
-	    {
-	        player.body.velocity.x = playerSpeed;
-
-	        player.animations.play('right');
-	    }
-		else if (cursors.up.isDown)
-	    {
-	        player.body.velocity.y = -playerSpeed;
-
-	        player.animations.play('up');
-	    }
-		else if (cursors.down.isDown)
-	    {
-	        player.body.velocity.y = playerSpeed;
-
-	        player.animations.play('down');
-	    }else {
-			player.frame = 26;
-			player.animations.stop()
-		}
+			// cars.forEach(checkPos, this);
 
 
-	    if(potholesRepaired > 100){
-	    	potholesRepaired = 0
-	    	game.state.start('level2');
-	    }
+
+			if (cursors.left.isDown)
+			{
+				player.body.velocity.x = -playerSpeed;
+
+				player.animations.play('left');
+			}
+			else if (cursors.right.isDown)
+			{
+				player.body.velocity.x = playerSpeed;
+
+				player.animations.play('right');
+			}
+			else if (cursors.up.isDown)
+			{
+				player.body.velocity.y = -playerSpeed;
+
+				player.animations.play('up');
+			}
+			else if (cursors.down.isDown)
+			{
+				player.body.velocity.y = playerSpeed;
+
+				player.animations.play('down');
+			}else {
+				player.frame = 26;
+				player.animations.stop();
+			}
 
 
-	    game.world.bringToTop(cars);
-	    updateText();
-		
-		game.physics.arcade.overlap(player, drinks, energyBoost, null, this);
-		game.physics.arcade.overlap(player, marks, speedAlert, null, this);
-		game.physics.arcade.overlap(player, cars, die, null, this);
-		game.physics.arcade.overlap(player, potholes, updateScore, null, this);
-		game.physics.arcade.collide(cars, cars);
-		game.physics.arcade.overlap(cars, potholes, reduceScore, null, this);
-		game.physics.arcade.overlap(cars, drinks, killPowerup, null, this);
-		game.physics.arcade.overlap(cars, marks, killPowerup, null, this);
-		
-		if(potholesRepaired < -1000) {
-			die(player)
-		}
-
-	},
-
-	
+			if(potholesRepaired > 100){
+				potholesRepaired = 0;
+				game.state.start('level2');
+			}
 
 
- };
+			game.world.bringToTop(cars);
+			updateText();
+
+			game.physics.arcade.overlap(player, drinks, energyBoost, null, this);
+			game.physics.arcade.overlap(player, marks, speedAlert, null, this);
+			game.physics.arcade.overlap(player, cars, die, null, this);
+			game.physics.arcade.overlap(player, potholes, updateScore, null, this);
+			game.physics.arcade.collide(cars, cars);
+			game.physics.arcade.overlap(cars, potholes, reduceScore, null, this);
+			game.physics.arcade.overlap(cars, drinks, killPowerup, null, this);
+			game.physics.arcade.overlap(cars, marks, killPowerup, null, this);
+
+			if(potholesRepaired < -1000) {
+				die(player);
+			}
+
+		},
+
+
+
+
+	};
+
+	//Called when player completes level 1
 	function winLevel() {
 		game.state.start('level2');
-	};
+	}
 

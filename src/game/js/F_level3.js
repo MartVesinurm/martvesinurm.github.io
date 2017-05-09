@@ -10,7 +10,7 @@ var level3State = {
 		carSpeedLeft = -100;
 		carSpeedRight = 100;
 		
-		level = 3
+		level = 3;
 		game.add.sprite(0, 0, 'background3');
 		cars = game.add.group();
 		potholes = game.add.group();
@@ -71,7 +71,7 @@ var level3State = {
 	},
 
 	pause: function(){
-	    	if(game.paused == true){
+	    	if(game.paused === true){
 	    		menu.destroy();
 	    		choiseLabel.destroy();
 	    		game.input.onTap.remove(this.pause, this);	
@@ -100,7 +100,7 @@ var level3State = {
 		player.body.velocity.x = 0;
 		player.body.velocity.y = 0;
 
-		cars.forEach(checkPos, this);
+		// cars.forEach(checkPos, this);
 		
 		if (cursors.left.isDown)
 	    {
@@ -135,7 +135,7 @@ var level3State = {
 	    }
 
 	    if(potholesRepaired > 200){
-	    	potholesRepaired = 0
+	    	potholesRepaired = 0;
 	    	game.state.start('win');
 	    }
 
@@ -153,7 +153,7 @@ var level3State = {
 		game.physics.arcade.overlap(cars, marks, killPowerup, null, this);
 
 		if(potholesRepaired < -1000) {
-			die(player)
+			die(player);
 		}
 	},
 
@@ -164,4 +164,4 @@ var level3State = {
 
 	function winLevel() {
 		game.state.start('win');
-	};
+	}
